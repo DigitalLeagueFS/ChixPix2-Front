@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
       let body = {login:this.state.login,password:this.state.password};
       Request.update('/login',body)
           .then(response=>{
-              console.log(response)
+              console.log(response);
           })
     };
 

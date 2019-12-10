@@ -1,18 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import LoginForm from "./Form/Form";
-import NavBar from "./NavigationBar/NavigationBar";
+import Routes from "./Routes/Routes";
 
-function App(){
-    return(
-        <div>
-            <LoginForm/>
-            <navBar/>
-        </div>
-    )
-}
-ReactDOM.render(<NavBar/>, document.getElementById('root'));
+ReactDOM.render(<Routes/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
