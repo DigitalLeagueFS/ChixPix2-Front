@@ -1,6 +1,6 @@
 .navbar{
     background-color: #e9e9e9;
-    height: 60px;
+    height: 62px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,15 +19,15 @@
 
 .navbar--elem{
     width: 200px;
-    height: 60px;
+    height: 62px;
     top:0;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-sizing: border-box;
     color: #0080ff;
     font-weight: bold;
+    box-sizing: content-box;
 }
 
 .navbar--elem li{
@@ -39,6 +39,6 @@
 }
 
 .navbar--elem:hover{
-    color: darkblue;
     background-color:whitesmoke;
+    border-bottom: 2px #0080ff solid;
 }
