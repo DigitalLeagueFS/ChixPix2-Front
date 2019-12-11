@@ -10,8 +10,10 @@ class NavBar extends React.Component
       let elem = event.target;
       arr.forEach(elem=>{
          elem.style.backgroundColor = '';
+         elem.style.borderBottom = 0
       });
       elem.style.backgroundColor = 'whitesmoke';
+      elem.style.borderBottom = '2px #0080ff solid'
     };
 
     render() {
