@@ -12,7 +12,7 @@ class Routes extends React.Component{
         return(
             <Router history={hist}>
                 <Route exact path ='/' component={LoginForm}/>
-                <Route path='/main' component={NavBar}/>
+                <Route path='/' component={NavBar}/>
             </Router>
         )
     }

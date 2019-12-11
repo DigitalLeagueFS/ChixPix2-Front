@@ -10,9 +10,9 @@ class NavBar extends React.Component
                 <header>
                     <div className='navbar'>
                         <ul>
-                            <li><Link to='/Tasks' className='navbar--elem'>Tasks</Link></li>
-                            <li><Link to='/My_tasks' className='navbar--elem'>My Tasks</Link></li>
-                            <li><Link to='/My_profile' className='navbar--elem'>My Profile</Link></li>
+                            <li><Link to='/tasks' className='navbar--elem'>Tasks</Link></li>
+                            <li><Link to='/my-tasks' className='navbar--elem'>My Tasks</Link></li>
+                            <li><Link to='/profile' className='navbar--elem'>My Profile</Link></li>
                         </ul>
                     </div>
                 </header>
