@@ -10,6 +10,7 @@ let instance = axios.create({
 });
 
 
+
 class BasicRequests {
     create(url,body){
         return instance.post(url,body)

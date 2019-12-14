@@ -15,13 +15,43 @@ class LoginForm extends React.Component {
         this.setState({ ...this.state.value, [name]: event.target.value });
     };
 
+    styledInput = (arr,ind) =>{
+        arr[ind].style.border = '1px solid red';
+        setTimeout(()=>{
+            arr[ind].style.border = 0;
+        },3000);
+    };
+
     sendData = ()=>{
       let body = {login:this.state.login,password:this.state.password};
+      let arr = document.querySelectorAll('.login-input');
       Request.update('/login',body)
           .then(response=>{
-              console.log(response);
+              switch (response.data) {
+                  case 'incorrect data':
+                      this.styledInput(arr,0);
+                      break;
+                  case 'incorrect password':
+                      this.styledInput(arr,1);
+                      break;
+                  default:
+                      localStorage.setItem('token',response.data);
+                      window.location.href = '/profile'
+              }
           })
     };
+
+    componentDidMount() {
+        Request.update('/check',{token:localStorage.getItem('token')})
+            .then(response=>{
+                if(response.data === 'ok')
+                    return(
+                        window.location.href = '/profile'
+                    );
+                else
+                    localStorage.clear();
+            })
+    }
 
     render() {
         return(
