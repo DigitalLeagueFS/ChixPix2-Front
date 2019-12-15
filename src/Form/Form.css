@@ -2,6 +2,7 @@ body{
     font-family: Arial, serif;
     padding: 0;
     margin: 0;
+    background: #f2f2f2;
 }
 
 .form{
@@ -26,7 +27,6 @@ body{
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background: #f2f2f2;
     box-sizing: border-box;
 }
 

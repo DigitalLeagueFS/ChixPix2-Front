@@ -9,23 +9,46 @@ let instance = axios.create({
     }
 });
 
-
+instance.interceptors.response.use(response=>{
+    return response
+},(error => {
+    if (error.response.status === 500){
+        localStorage.clear();
+        window.location.href = '/'
+    }
+}));
 
 class BasicRequests {
     create(url,body){
-        return instance.post(url,body)
+        return instance.post(url,body,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
     }
 
     get(url){
-        return instance.get(url)
+        return instance.get(url,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
     }
 
     update(url,body){
-        return instance.put(url,body)
+        return instance.put(url,body,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
     }
 
     delete(url){
-        return instance.delete(url)
+        return instance.delete(url,{
+            headers:{
+                'Authorization':localStorage.getItem('token')
+            }
+        })
     }
 }
 
