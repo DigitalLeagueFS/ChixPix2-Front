@@ -1,0 +1,38 @@
+body{
+    font-family: Arial, serif;
+    padding: 0;
+    margin: 0;
+    background: #f2f2f2;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #f1f1f1;
+    max-width: 200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.img{
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.profile-input{
+    width: 190px;
+    border: none;
+    height: 50px;
+    margin-top: 5px;
+    padding-left: 10px;
+    text-align: center;
+    background-color: #ddd;
+    outline: none;
+    font-size: 16px;
+    font-weight: bold;
+
+}
