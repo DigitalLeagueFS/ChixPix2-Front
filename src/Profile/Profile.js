@@ -1,14 +1,13 @@
 import React from "react";
 import Request from "../Requests";
 import "./Profile.css";
-import {Input} from '@material-ui/core'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
         '& .MuiTextField-root': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(3),
             width: 200,
         },
     },
@@ -17,9 +16,8 @@ const useStyles = makeStyles(theme => ({
 let FormPropsTextField = function (props) {
     return(
         <TextField
-            disabled
             id="outlined-disabled"
-            label="Disabled"
+            disabled
             value={props}
             variant="outlined"
         />
@@ -56,13 +54,13 @@ class UserInfo extends React.Component{
                         {FormPropsTextField(this.state.secondName)}
                     </div>
                     <div>
-                        <Input disabled disableUnderline={'true'} value = {this.state.firstName}/>
+                        {FormPropsTextField(this.state.firstName)}
                     </div>
                     <div>
-                        <Input disabled disableUnderline={'true'} value = {this.state.thirdName}/>
+                        {FormPropsTextField(this.state.thirdName)}
                     </div>
                     <div>
-                        <Input disabled disableUnderline={'true'} value = {this.state.date}/>
+                        {FormPropsTextField(this.state.date)}
                     </div>
                 </div>
             </div>
