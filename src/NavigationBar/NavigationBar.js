@@ -22,7 +22,7 @@ class NavBar extends React.Component
                 <header>
                     <div className='navbar'>
                         <ul>
-                            <li><Link to='/tasks' className='navbar--elem' onClick={this.handleClick}>Tasks</Link></li>
+                            <li><Link to='/main' className='navbar--elem' onClick={this.handleClick}>Main</Link></li>
                             <li><Link to='/my-tasks' className='navbar--elem' onClick={this.handleClick}>My Tasks</Link></li>
                             <li><Link to='/profile' className='navbar--elem' onClick={this.handleClick}>My Profile</Link></li>
                         </ul>

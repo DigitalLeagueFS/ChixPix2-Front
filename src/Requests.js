@@ -13,10 +13,12 @@ let instance = axios.create({
 instance.interceptors.response.use(response=>{
     return response
 },(error => {
-    if (error.response.status === 401){
-        localStorage.clear();
-        if(window.location.pathname !== '/')
-           window.location.href = '/'
+    if(error.response){
+        if (error.response.status === 401){
+            localStorage.clear();
+            if(window.location.pathname !== '/')
+                window.location.href = '/'
+        }
     }
 }));
 
