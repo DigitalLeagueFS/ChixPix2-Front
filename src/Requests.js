@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 
+
 let instance = axios.create({
     baseURL:'http://localhost:3000',
     timeout:1000,
@@ -12,9 +13,10 @@ let instance = axios.create({
 instance.interceptors.response.use(response=>{
     return response
 },(error => {
-    if (error.response.status === 500){
+    if (error.response.status === 401){
         localStorage.clear();
-        window.location.href = '/'
+        if(window.location.pathname !== '/')
+           window.location.href = '/'
     }
 }));
 

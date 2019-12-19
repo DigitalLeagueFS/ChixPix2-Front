@@ -2,13 +2,17 @@ import React from 'react'
 import './Form.css'
 import bird from './bird.png'
 import Request from "../Requests";
+import {Redirect} from "react-router";
+
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             login: '',
-            password: ''
+            password: '',
+            valid:false
         };
+        this.checkToken();
     }
 
     handleChange = name => event => {
@@ -41,19 +45,21 @@ class LoginForm extends React.Component {
           })
     };
 
-    componentDidMount() {
-        Request.update('/check',{token:localStorage.getItem('token')})
-            .then(response=>{
-                if(response.data === 'ok')
-                    return(
-                        window.location.href = '/profile'
-                    );
-                else
-                    localStorage.clear();
+    checkToken = () => {
+        Request.get('/check')
+            .then((response)=>{
+                if(response){
+                    this.setState({
+                        valid:true
+                    })
+                }
             })
-    }
+    };
 
     render() {
+        if(this.state.valid){
+            return <Redirect to='/profile'/>
+        }
         return(
             <div className='container'>
                 <img className='form-logo' src={bird} alt='logo'/>

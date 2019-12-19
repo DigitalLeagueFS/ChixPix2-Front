@@ -33,8 +33,8 @@ class UserInfo extends React.Component{
     }
     render() {
         return(
-            <div className={'box'}>
-                <div className={'card'}>
+            <div className='box'>
+                <div className='card'>
                     <div>
                         {FormPropsTextField(this.state.secondName,'Second Name')}
                     </div>
@@ -48,7 +48,7 @@ class UserInfo extends React.Component{
                         {FormPropsTextField(this.state.date,'Date')}
                     </div>
                     <div>
-                        <button type={'submit'} className={'logout-btn'} onClick={this.logOut}>Log Out</button>
+                        <button type={'submit'} className='logout-btn' onClick={this.logOut}>Log Out</button>
                     </div>
                 </div>
             </div>
