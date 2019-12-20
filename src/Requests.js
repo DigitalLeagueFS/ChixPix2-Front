@@ -11,6 +11,9 @@ let instance = axios.create({
 });
 
 instance.interceptors.response.use(response=>{
+    if(!response.data){
+        window.location.reload();
+    }
     return response
 },(error => {
     if(error.response){
@@ -18,6 +21,9 @@ instance.interceptors.response.use(response=>{
             localStorage.clear();
             if(window.location.pathname !== '/')
                 window.location.href = '/'
+        }
+        if (error.response.status === 406){
+            window.location.href = '/profile'
         }
     }
 }));
