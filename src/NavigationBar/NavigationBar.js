@@ -22,9 +22,9 @@ class NavBar extends React.Component
                 <header>
                     <div className='navbar'>
                         <ul>
-                            <li><Link to='/main' className='navbar--elem' onClick={this.handleClick}>Main</Link></li>
-                            <li><Link to='/task' className='navbar--elem' onClick={this.handleClick}>Task</Link></li>
-                            <li><Link to='/profile' className='navbar--elem' onClick={this.handleClick}>Profile</Link></li>
+                            <li><Link to='/main/tasks' className='navbar--elem' onClick={this.handleClick}>Main</Link></li>
+                            <li><Link to='/mytasks/usertasks' className='navbar--elem' onClick={this.handleClick}>My Tasks</Link></li>
+                            <li><Link to='/profile/workers' className='navbar--elem' onClick={this.handleClick}>Profile</Link></li>
                         </ul>
                     </div>
                 </header>

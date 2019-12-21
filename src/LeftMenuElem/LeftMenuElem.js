@@ -1,5 +1,5 @@
 import React from "react";
-import {BusinessCenter, Dashboard, People,RecentActors,LibraryBooks,Portrait} from "@material-ui/icons";
+import {BusinessCenter, Dashboard, People,RecentActors,LibraryBooks,Portrait, Assignment} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import './LeftMenuElem.css'
 
@@ -10,6 +10,9 @@ function LeftMenuElem(props){
     switch (props.context) {
         case 'Companies':
             img = <BusinessCenter style={{pointerEvents:'none'}}/>;
+            break;
+        case 'Tasks':
+            img = <Assignment style={{pointerEvents:'none'}}/>;
             break;
         case 'My Tasks':
             img = <Dashboard style={{pointerEvents:'none'}}/>;

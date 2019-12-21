@@ -13,6 +13,7 @@ class UserInfo extends React.Component{
             secondName:'',
             thirdName:'',
             date:'',
+            post:'',
         }
     }
 
@@ -23,7 +24,8 @@ class UserInfo extends React.Component{
                     firstName:response.data.firstName,
                     secondName: response.data.secondName,
                     thirdName: response.data.thirdName,
-                    date: response.data.date
+                    date: response.data.date,
+                    post: response.data.post
                 });
             })
     }
@@ -33,6 +35,7 @@ class UserInfo extends React.Component{
     }
     render() {
         return(
+            <div className='my--profile--box'>
                 <div className='card'>
                     <div>
                         {FormPropsTextField(this.state.secondName,'Second Name')}
@@ -53,6 +56,7 @@ class UserInfo extends React.Component{
                         <button type={'submit'} className='logout-btn' onClick={this.logOut}>Log Out</button>
                     </div>
                 </div>
+            </div>
         )
     }
 }

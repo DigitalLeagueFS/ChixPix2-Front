@@ -5,6 +5,12 @@ body{
     background: #f2f2f2;
 }
 
+.my--profile--box{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+    float: right;
+}
 .card{
     max-width: 200px;
     max-height: 500px;
