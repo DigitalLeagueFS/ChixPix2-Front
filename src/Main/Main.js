@@ -1,6 +1,6 @@
 import React from 'react'
 import './Main.css'
-import LeftMenuElem from "./LeftMenuElem";
+import LeftMenuElem from "../LeftMenuElem/LeftMenuElem";
 
 class Main extends React.Component{
 
@@ -9,7 +9,6 @@ class Main extends React.Component{
             <div className='main--box'>
                    <div className='left--navbar'>
                        <LeftMenuElem context='Companies' link='/main/companies'/>
-                       <LeftMenuElem context='Tasks' link='/main/tasks'/>
                        <LeftMenuElem context='Clients' link='/main/clients'/>
                    </div>
             </div>

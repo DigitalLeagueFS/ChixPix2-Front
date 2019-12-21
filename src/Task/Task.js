@@ -1,20 +1,19 @@
 import React from "react";
 import Request from "../Requests";
-import "./Profile.css";
+import "./Task.css";
 import LeftMenuElem from "../LeftMenuElem/LeftMenuElem";
 
-class Profile extends React.Component{
-
+class Task extends React.Component{
     render() {
         return(
             <div className='main--box'>
                 <div className='left--navbar'>
-                    <LeftMenuElem context='My Profile' link='/profile/my_profile'/>
-                    <LeftMenuElem context='Workers' link='/profile/workers'/>
+                    <LeftMenuElem context='My Tasks' link='/tasks/my_tasks'/>
+                    <LeftMenuElem context='Archive' link='/tasks/archive'/>
                 </div>
             </div>
         )
     }
 }
 
-export default Profile;
+export default Task;
