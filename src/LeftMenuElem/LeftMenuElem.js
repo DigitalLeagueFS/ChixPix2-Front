@@ -41,8 +41,10 @@ function LeftMenuElem(props){
        let elem = event.target;
        elem.classList.add('addColor');
     }
-        return(
-            <Link className='left--navbar--elem' to={props.link} onClick={handleClick}>
+
+
+    return(
+            <Link className={`left--navbar--elem ${props.link === window.location.pathname ? 'addColor' : ''}`} to={props.link} onClick={handleClick}>
                     {img}
                     <p>{props.context}</p>
             </Link>

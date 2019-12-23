@@ -11,9 +11,6 @@ let instance = axios.create({
 });
 
 instance.interceptors.response.use(response=>{
-    if(!response.data){
-        window.location.reload();
-    }
     return response
 },(error => {
     if(error.response){

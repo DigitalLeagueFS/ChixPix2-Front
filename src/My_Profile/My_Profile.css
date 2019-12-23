@@ -9,7 +9,9 @@ body{
     display:flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
     float: right;
+    height: 80vh;
 }
 .card{
     max-width: 200px;
