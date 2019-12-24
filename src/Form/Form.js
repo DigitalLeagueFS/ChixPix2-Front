@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
                       break;
                   default:
                       localStorage.setItem('token',response.data);
-                      window.location.href = '/profile'
+                      window.location.href = '/main/tasks'
               }
           })
     };
@@ -58,7 +58,7 @@ class LoginForm extends React.Component {
 
     render() {
         if(this.state.valid){
-            return <Redirect to='/profile'/>
+            return <Redirect to='/main/tasks'/>
         }
         return(
             <div className='container'>

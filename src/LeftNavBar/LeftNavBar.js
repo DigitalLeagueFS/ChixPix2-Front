@@ -9,9 +9,9 @@ function LeftNavBar(props) {
            return(
                <div className='main--box'>
                    <div className='left--navbar'>
+                       <LeftMenuElem context='Tasks' link='/main/tasks'/>
                        <LeftMenuElem context='Companies' link='/main/companies'/>
                        <LeftMenuElem context='Clients' link='/main/clients'/>
-                       <LeftMenuElem context='Tasks' link='/main/tasks'/>
                    </div>
                </div>
            );

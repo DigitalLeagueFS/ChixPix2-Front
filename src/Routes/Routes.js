@@ -26,9 +26,9 @@ class Routes extends React.Component{
                    <Route path='/' component={NavBar}/>
                    <Route>
                        <Route path='/main' render={(props) => (<LeftNavBar {...props} context='LeftNavBarMain'/>)}/>
+                       <Route exact path='/main/tasks' component={Tasks}/>
                        <Route exact path='/main/companies' component={Companies}/>
                        <Route exact path='/main/clients' component={Clients}/>
-                       <Route exact path='/main/tasks' component={Tasks}/>
                   </Route>
                   <Route>
                        <Route path='/mytasks' render={(props) => (<LeftNavBar {...props} context='LeftNavBarMyTasks'/>)}/>
