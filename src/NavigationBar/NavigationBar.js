@@ -18,13 +18,22 @@ class NavBar extends React.Component
 
     render() {
         return(
-            <div>
+            <div style={window.location.pathname === '/' ? {display:'none'} : {}}>
                 <header>
                     <div className='navbar'>
                         <ul>
-                            <li><Link to='/main/tasks' className='navbar--elem' onClick={this.handleClick}>Main</Link></li>
-                            <li><Link to='/mytasks/usertasks' className='navbar--elem' onClick={this.handleClick}>My Tasks</Link></li>
-                            <li><Link to='/profile/my_profile' className='navbar--elem' onClick={this.handleClick}>Profile</Link></li>
+                            <li><Link to='/main/tasks' className='navbar--elem'
+                                      style = {window.location.pathname.includes('main') ?
+                                          {backgroundColor:'whitesmoke',borderBottom :'2px #0080ff solid'} : {}}
+                                      onClick={this.handleClick}>Main</Link></li>
+                            <li><Link to='/mytasks/usertasks' className='navbar--elem'
+                                      style = {window.location.pathname.includes('mytasks') ?
+                                          {backgroundColor:'whitesmoke',borderBottom :'2px #0080ff solid'} : {}}
+                                      onClick={this.handleClick}>My Tasks</Link></li>
+                            <li><Link to='/profile/my_profile' className='navbar--elem'
+                                      style = {window.location.pathname.includes('profile') ?
+                                          {backgroundColor:'whitesmoke',borderBottom :'2px #0080ff solid'} : {}}
+                                      onClick={this.handleClick}>Profile</Link></li>
                         </ul>
                     </div>
                 </header>

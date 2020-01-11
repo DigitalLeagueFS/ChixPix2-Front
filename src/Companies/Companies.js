@@ -10,7 +10,7 @@ class Companies extends React.Component{
         super(props);
         this.state = {
             columns: [
-                { title: 'Name', field: 'name' },
+                { title: 'Name', field: 'company_name' },
                 { title: 'Type', field: 'desc' },
             ],
             data: [],
