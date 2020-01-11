@@ -6,19 +6,23 @@ import ClientDialog from "./ClientDialog/ClientDialog";
 
 
 function AddClientIcon() {
-    const [clicked,setClicked] = useState(false);
+    const [open, setOpen] = useState(false);
 
-    function handleClick() {
-        setClicked(!clicked)
-    }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
 
     return(
-        <div className='addClient-box' onClick={handleClick}>
+        <div className='addClient-box' onClick={handleClickOpen}>
             <div className='rightClientIcon'>
                 <Accessibility style={{marginTop:'10px'}}/>
                 <p>Add Client</p>
-                <Dialog open={clicked} onClose={handleClick}><ClientDialog/></Dialog>
+                <Dialog open={open} onClose={handleClose}><ClientDialog onClick={handleClose}/></Dialog>
             </div>
         </div>
     )
