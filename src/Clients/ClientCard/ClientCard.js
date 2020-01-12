@@ -2,20 +2,32 @@ import React from 'react'
 import './ClientCard.css'
 import Request from "../../Requests";
 import {Dialog} from "@material-ui/core";
+import InfoCard from "./ClientDataDialog/ClientDataDialog";
 
 class ClientCard extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            open:false
+            open:false,
+            name: '',
+            surname: '',
+            thirdName: '',
+            phone: '',
+            date: '',
+            link: '',
+            company_name: ''
         }
     }
 
     showClient = () => {
         Request.get(`/getClient/${this.props.id}`)
             .then(response=>{
-                console.log(response);
+                this.setState({...response.data,open : true});
             })
+    };
+
+    handleClose = () =>{
+        this.setState({open : false});
     };
 
     render() {
@@ -30,8 +42,9 @@ class ClientCard extends React.Component{
                         <h3>{this.props.company}</h3>
                     </div>
                 </div>
-                <Dialog open={this.state.open}></Dialog>
+                <Dialog open={this.state.open} onClose={this.handleClose}><InfoCard {...this.state}/></Dialog>
             </div>
+
         )
     }
 }

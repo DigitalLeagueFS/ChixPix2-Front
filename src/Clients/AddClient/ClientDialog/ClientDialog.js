@@ -14,7 +14,7 @@ class ClientDialog extends React.Component{
             phone: '',
             date: '',
             link: '',
-            company: '',
+            company: [],
             nameValid: false,
             surnameValid: false,
             thirdNameValid: false,
@@ -23,7 +23,7 @@ class ClientDialog extends React.Component{
             linkValid: false,
             companyValid: false,
             formValid: false
-        }
+        };
     }
 
     handleChange = event => {
@@ -85,10 +85,23 @@ class ClientDialog extends React.Component{
     sendData = ()=>{
         Request.create('/createclients', this.state)
             .then(response=>{
-                console.log(response);
             })
     };
 
+    componentDidMount() {
+        Request.get('/getcompaniesname')
+            .then(response=>{
+                this.setState({company : response.data});
+            })
+    };
+
+    mapOption(){
+        return this.state.company.map((value) => {this.getOption(value.company_name)})
+    };
+
+    getOption(name) {
+        return <option value = {`${name}`}>{name}</option>
+    };
 
     render() {
         return(
@@ -125,8 +138,10 @@ class ClientDialog extends React.Component{
                         <p>
                             <label>
                                 Company:
-                                <input className='clients-input' type={'text'} name={'company'} placeholder={'Enter Name of Company'}
-                                       value={this.state.company} onChange={this.handleChange}/>
+                                <select className='clients-input' multiple={true} name={'company'} placeholder={'Enter Name of Company'}
+                                       value={this.state.company} onChange={this.handleChange}>
+                                    {this.mapOption()}
+                                </select>
                             </label>
                         </p>
                     </div>
