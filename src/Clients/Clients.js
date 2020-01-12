@@ -21,11 +21,12 @@ class Clients extends React.Component{
     }
 
     showClients(){
-        return this.state.data.map((elem,num)=>{
+        return this.state.data.map(elem=>{
             return <ClientCard firstName = {elem.name}
                                secondName = {elem.surname}
                                company = {elem.company_name}
                                link = {elem.link}
+                               id = {elem.id}
             />
         })
     }

@@ -3,6 +3,7 @@ import Request from "../../../Requests";
 import './ClientDialog.css';
 
 
+
 class ClientDialog extends React.Component{
     constructor(props) {
         super(props);
@@ -54,7 +55,7 @@ class ClientDialog extends React.Component{
                 phoneValid = value.match(/^((\+7|7|8)+([0-9]){10})$/gm);
                 break;
             case 'date':
-                dateValid = value.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/);
+                dateValid = value.match(/^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])\d{4}$/);
                 break;
             case 'link':
                 linkValid = value.length > 10;
@@ -77,12 +78,15 @@ class ClientDialog extends React.Component{
     }
 
     validateForm(){
-        this.setState({formValid: this.state.name && this.state.surname && this.state.thirdName && this.state.phone && this.state.date && this.state.link && this.state.company});
+        this.setState({formValid: this.state.name && this.state.surname
+                && this.state.thirdName && this.state.phone && this.state.date && this.state.link && this.state.company});
     }
 
     sendData = ()=>{
-        let arr = document.querySelectorAll('.create-input');
-        Request.create('/createclients', this.state);
+        Request.create('/createclients', this.state)
+            .then(response=>{
+                console.log(response);
+            })
     };
 
 
@@ -130,7 +134,7 @@ class ClientDialog extends React.Component{
                         <p>
                             <label>
                                 Phone:
-                                <input className='clients-input' type={'text'} name={'phone'} placeholder={'Enter Phone'}
+                                <input className='clients-input' type={'phone'} name={'phone'} placeholder={'Enter Phone'}
                                        value={this.state.phone} onChange={this.handleChange}/>
                             </label>
                         </p>
@@ -139,7 +143,7 @@ class ClientDialog extends React.Component{
                         <p>
                             <label>
                                 Date:
-                                <input className='clients-input' type={'text'} name={'date'} placeholder={'Enter Date'}
+                                <input className='clients-input' type={'date'} name={'date'} placeholder={'Enter Date'}
                                        value={this.state.date} onChange={this.handleChange}/>
                             </label>
                         </p>

@@ -18,12 +18,14 @@ function AddClientIcon() {
 
 
     return(
+        <div>
         <div className='addClient-box' onClick={handleClickOpen}>
             <div className='rightClientIcon'>
                 <Accessibility style={{marginTop:'10px'}}/>
                 <p>Add Client</p>
-                <Dialog open={open} onClose={handleClose}><ClientDialog onClick={handleClose}/></Dialog>
             </div>
+        </div>
+            <Dialog open={open} onClose={handleClose}><ClientDialog onClick={handleClose}/></Dialog>
         </div>
     )
 }
