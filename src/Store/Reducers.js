@@ -4,7 +4,9 @@ const AppState = {
     text:'',
     img:'',
     link:'',
-    error:''
+    error:'',
+    needUpdate:false,
+    success:false
 };
 
 export function companyClick(state = AppState,action) {
@@ -17,12 +19,37 @@ export function companyClick(state = AppState,action) {
     return state
 }
 
-// export function errorState(state= AppState,action) {
-//     if(action.type === 'ADD_ERROR'){
-//         return {
-//             ...state,
-//             error: action.payload
-//         }
-//     }
-//     return state
-// }
+export function needUpdate(state = AppState,action) {
+    switch (action.type) {
+        case 'NEED_UPDATE':
+            return{
+                ...state,
+                needUpdate: true,
+            };
+        case 'NO_NEED_UPDATE':
+            return {
+                ...state,
+                needUpdate: false
+            };
+        default:
+            return state
+    }
+}
+
+export function snackContent(state = AppState,action) {
+    switch (action.type) {
+        case 'SHOW_SNACK':
+            return {
+                ...state,
+                success: true
+            };
+        case 'HIDE_SNACK':{
+            return {
+                ...state,
+                success: false
+            }
+        }
+        default:
+            return state
+    }
+}

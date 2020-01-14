@@ -1,6 +1,7 @@
 import * as React from "react"
 import {Link} from "react-router-dom"
 import './NavigationBar.css'
+import Snack from "../Snack/Snack";
 
 class NavBar extends React.Component
 {
@@ -37,6 +38,7 @@ class NavBar extends React.Component
                         </ul>
                     </div>
                 </header>
+                <Snack/>
             </div>
         );
     }

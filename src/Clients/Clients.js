@@ -3,13 +3,15 @@ import './Clients.css'
 import ClientCard from "./ClientCard/ClientCard";
 import Request from "../Requests";
 import AddClientIcon from "./AddClient/AddClientIcon";
+import {connect} from 'react-redux'
+import {mapDispatchToProps, mapStateToProps} from "./indexClients";
 
 class Clients extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             data:[]
-        }
+        };
     }
     componentDidMount() {
         Request.get('/clients')
@@ -18,6 +20,18 @@ class Clients extends React.Component{
                     data:response.data
                 })
             })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.needUpdate){
+            this.props.updateDataCl();
+            Request.get('/clients')
+                .then(response=>{
+                    this.setState({
+                        data:response.data
+                    })
+                })
+        }
     }
 
     showClients(){
@@ -45,4 +59,7 @@ class Clients extends React.Component{
     }
 }
 
-export default Clients;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Clients);

@@ -33,7 +33,7 @@ class ClientCard extends React.Component{
     render() {
         return(
             <div>
-                <div className='clientCard' key={this.props.firstName} onClick={this.showClient}>
+                <div className='clientCard' key={this.props.id} onClick={this.showClient}>
                     <img src={this.props.link}
                          className='clientCard-img' alt={this.props.firstName}/>
                     <div>

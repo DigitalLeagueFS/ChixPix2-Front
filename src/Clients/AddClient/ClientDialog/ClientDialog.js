@@ -1,7 +1,8 @@
 import React from "react";
 import Request from "../../../Requests";
 import './ClientDialog.css';
-
+import {connect} from 'react-redux'
+import {mapDispatchToProps, mapStateToProps} from "./indexClientDialog";
 
 
 class ClientDialog extends React.Component{
@@ -14,6 +15,7 @@ class ClientDialog extends React.Component{
             phone: '',
             date: '',
             link: '',
+            clickedCompany:'',
             company: [],
             nameValid: false,
             surnameValid: false,
@@ -22,14 +24,13 @@ class ClientDialog extends React.Component{
             dateValid: false,
             linkValid: false,
             companyValid: false,
-            formValid: false
+            formValid: false,
         };
     }
 
-    handleChange = event => {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({[name]: value }, () => {this.validateField(name, value)});
+    handleChange = name => event => {
+        this.setState({ ...this.state.value, [name]: event.target.value },
+            this.validateField(name,event.target.value));
     };
 
     validateField(fieldName, value){
@@ -83,8 +84,21 @@ class ClientDialog extends React.Component{
     }
 
     sendData = ()=>{
-        Request.create('/createclients', this.state)
+        let body = {
+            name: this.state.name,
+            surname: this.state.surname,
+            thirdName: this.state.thirdName,
+            phone: this.state.phone,
+            date: this.state.date,
+            link: this.state.link,
+            clickedCompany: this.state.clickedCompany
+        };
+        Request.create('/createclients', body)
             .then(response=>{
+                if(response.status === 200){
+                    this.props.showSnack();
+                    this.props.updateData();
+                }
             })
     };
 
@@ -95,12 +109,14 @@ class ClientDialog extends React.Component{
             })
     };
 
-    mapOption(){
-        return this.state.company.map((value) => {this.getOption(value.company_name)})
+    getOption(name) {
+        return <option value = {name} key={name}>{name}</option>
     };
 
-    getOption(name) {
-        return <option value = {`${name}`}>{name}</option>
+    mapOption(){
+        return this.state.company.map(value => {
+            return this.getOption(value.company_name)
+        })
     };
 
     render() {
@@ -112,7 +128,7 @@ class ClientDialog extends React.Component{
                             <label>
                                 Name:
                                 <input className='clients-input' type={'text'} name={'name'} placeholder={'Enter Name'}
-                                       value={this.state.name} onChange={this.handleChange}/>
+                                       value={this.state.name} onChange={this.handleChange('name')}/>
                             </label>
                         </p>
                     </div>
@@ -121,7 +137,7 @@ class ClientDialog extends React.Component{
                             <label>
                                 Surname:
                                 <input className='clients-input' type={'text'} name={'surname'} placeholder={'Enter Surname'}
-                                       value={this.state.surname} onChange={this.handleChange}/>
+                                       value={this.state.surname} onChange={this.handleChange('surname')}/>
                             </label>
                         </p>
                     </div>
@@ -130,7 +146,7 @@ class ClientDialog extends React.Component{
                             <label>
                                 Third Name:
                                 <input className='clients-input' type={'text'} name={'thirdName'} placeholder={'Enter Third Name'}
-                                       value={this.state.thirdName} onChange={this.handleChange}/>
+                                       value={this.state.thirdName} onChange={this.handleChange('thirdName')}/>
                             </label>
                         </p>
                     </div>
@@ -138,8 +154,8 @@ class ClientDialog extends React.Component{
                         <p>
                             <label>
                                 Company:
-                                <select className='clients-input' multiple={true} name={'company'} placeholder={'Enter Name of Company'}
-                                       value={this.state.company} onChange={this.handleChange}>
+                                <select className='clients-input' name={'company'} placeholder={'Enter Name of Company'}
+                                        required defaultValue={this.state.clickedCompany} onChange={this.handleChange('clickedCompany')}>
                                     {this.mapOption()}
                                 </select>
                             </label>
@@ -150,7 +166,7 @@ class ClientDialog extends React.Component{
                             <label>
                                 Phone:
                                 <input className='clients-input' type={'phone'} name={'phone'} placeholder={'Enter Phone'}
-                                       value={this.state.phone} onChange={this.handleChange}/>
+                                       value={this.state.phone} onChange={this.handleChange('phone')}/>
                             </label>
                         </p>
                     </div>
@@ -159,7 +175,7 @@ class ClientDialog extends React.Component{
                             <label>
                                 Date:
                                 <input className='clients-input' type={'date'} name={'date'} placeholder={'Enter Date'}
-                                       value={this.state.date} onChange={this.handleChange}/>
+                                       value={this.state.date} onChange={this.handleChange('date')}/>
                             </label>
                         </p>
                     </div>
@@ -168,13 +184,16 @@ class ClientDialog extends React.Component{
                             <label>
                                 Link to Photo:
                                 <input className='clients-input' type={'text'} name={'link'} placeholder={'Enter Link'}
-                                       value={this.state.link} onChange={this.handleChange}/>
+                                       value={this.state.link} onChange={this.handleChange('link')}/>
                             </label>
                         </p>
                     </div>
                     <div>
                         <p>
-                            <button className={'clients-btn'} onClick={this.sendData} disabled={!this.state.formValid}>Create Client</button>
+                            <button className={'clients-btn'} onClick={this.sendData}
+                                    disabled={!this.state.formValid || this.state.ok}>
+                                Create client
+                            </button>
                         </p>
                     </div>
                 </div>
@@ -184,4 +203,7 @@ class ClientDialog extends React.Component{
 }
 
 
-export default ClientDialog
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ClientDialog)

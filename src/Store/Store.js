@@ -1,8 +1,8 @@
 import {combineReducers, createStore} from "redux";
-import {companyClick} from "./Reducers";
+import {companyClick, needUpdate, snackContent} from "./Reducers";
 
 
-export const store = createStore(combineReducers({companyClick}));
+export const store = createStore(combineReducers({companyClick,needUpdate,snackContent}));
 
 store.subscribe(()=>{
     console.log(store.getState())

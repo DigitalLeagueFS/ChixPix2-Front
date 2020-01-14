@@ -7,7 +7,7 @@ function InfoCard(props) {
     <div className='client-info-dialog'>
         <div className='client-form-dialog'>
             <div>
-                <img src={props.link} className='client-img-dialog' alt='Client Photo'/>
+                <img src={props.link} className='client-img-dialog' alt={props.firstName}/>
             </div>
             <div>
                 {FormPropsTextField(props.name,'Name')}
