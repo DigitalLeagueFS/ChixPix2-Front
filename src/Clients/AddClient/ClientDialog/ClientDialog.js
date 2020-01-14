@@ -17,71 +17,46 @@ class ClientDialog extends React.Component{
             link: '',
             clickedCompany:'',
             company: [],
-            nameValid: false,
-            surnameValid: false,
-            thirdNameValid: false,
-            phoneValid: false,
-            dateValid: false,
-            linkValid: false,
-            companyValid: false,
             formValid: false,
         };
     }
 
     handleChange = name => event => {
-        this.setState({ ...this.state.value, [name]: event.target.value },
-            this.validateField(name,event.target.value));
+        this.setState({ ...this.state.value, [name]: event.target.value });
     };
 
-    validateField(fieldName, value){
-        let nameValid = this.state.nameValid;
-        let surnameValid = this.state.surnameValid;
-        let thirdNameValid = this.state.thirdNameValid;
-        let phoneValid = this.state.phoneValid;
-        let dateValid = this.state.dateValid;
-        let linkValid = this.state.linkValid;
-        let companyValid = this.state.companyValid;
-
-        switch(fieldName) {
-            case 'name':
-                nameValid = value.match(/^[a-z]$/i) && value.length >= 5;
-                break;
-            case 'surname':
-                surnameValid = value.match(/^[a-z]$/i) && value.length >= 5;
-                break;
-            case 'thirdName':
-                thirdNameValid = value.match(/^[a-z]$/i) && value.length >= 5;
-                break;
-            case 'phone':
-                phoneValid = value.match(/^((\+7|7|8)+([0-9]){10})$/gm);
-                break;
-            case 'date':
-                dateValid = value.match(/^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])\d{4}$/);
-                break;
-            case 'link':
-                linkValid = value.length > 10;
-                break;
-            case 'company':
-                companyValid = value.match(/^[a-z]$/i) && value.length >= 3;
-                break;
-            default:
-                break;
+    checkInputs(){
+        let name = document.getElementById('name').value;
+        let surname = document.getElementById('surname').value;
+        let thirdName = document.getElementById('thirdName').value;
+        let phone = document.getElementById('phone').value;
+        let link = document.getElementById('link').value;
+        let checkName = /^[a-z]$/i;
+        let checkPhone = /^((\+7|7|8)+([0-9]){10})$/gm;
+        if(name.length < 5 || !checkName.test(name))
+        {
+            return false;
         }
-        this.setState({
-            nameValid: nameValid,
-            surnameValid: surnameValid,
-            thirdNameValid: thirdNameValid,
-            phoneValid: phoneValid,
-            dateValid: dateValid,
-            linkValid: linkValid,
-            companyValid: companyValid
-        },this.validateForm);
+        if(surname.length < 5 || !checkName.test(surname))
+        {
+            return false;
+        }
+        if(thirdName.length < 5 || !checkName.test(thirdName))
+        {
+            return false;
+        }
+        if(link.length < 5)
+        {
+            return false;
+        }
+        if(!checkPhone.test(phone))
+        {
+            return false;
+        }
+
+        return true;
     }
 
-    validateForm(){
-        this.setState({formValid: this.state.name && this.state.surname
-                && this.state.thirdName && this.state.phone && this.state.date && this.state.link && this.state.company});
-    }
 
     sendData = ()=>{
         let body = {
@@ -122,7 +97,7 @@ class ClientDialog extends React.Component{
     render() {
         return(
             <div className='container-dialog'>
-                <div className='form-dialog'>
+                <div className='form-dialog' onSubmit={this.checkInputs}>
                     <div>
                         <p>
                             <label>
