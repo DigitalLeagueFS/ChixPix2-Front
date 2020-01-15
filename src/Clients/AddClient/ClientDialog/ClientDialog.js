@@ -4,6 +4,15 @@ import './ClientDialog.css';
 import {connect} from 'react-redux'
 import {mapDispatchToProps, mapStateToProps} from "./indexClientDialog";
 
+const validateForm = (errors) => {
+    let valid = true;
+    Object.values(errors).forEach(
+        // if we have an error string set valid to false
+        (val) => val.length > 0 && (valid = false)
+    );
+    return valid;
+};
+
 
 class ClientDialog extends React.Component{
     constructor(props) {
@@ -17,64 +26,66 @@ class ClientDialog extends React.Component{
             link: '',
             clickedCompany:'',
             company: [],
-            formValid: false,
+            errors: {
+                name: '',
+                surname: '',
+                thirdName: '',
+                phone: '',
+                link: '',
+            }
         };
     }
 
     handleChange = name => event => {
-        this.setState({ ...this.state.value, [name]: event.target.value });
+        event.preventDefault();
+        const{name1,value} = event.target;
+        let errors = this.state.errors;
+        let checkPhone = /^((\+7|7|8)+([0-9]){10})$/gm;
+        switch (name1) {
+            case 'name':
+                errors.name = value.length < 5 ? 'Full Name must be 5 characters long!' : '';
+                break;
+            case 'surname':
+                errors.surname = value.length < 5 ? 'Full Surname must be 5 characters long!' : '';
+                break;
+            case 'thirdName':
+                errors.thirdName = value.length < 5 ? 'Full Third Name must be 5 characters long!' : '';
+                break;
+            case 'phone':
+                errors.phone = !checkPhone.test(value) ? 'Enter correct phone number!' : '';
+                break;
+            case 'link':
+                errors.link = value.length < 10 ? 'Link must be 10 characters long!' : '';
+                break;
+            default:
+                break;
+        }
+        this.setState({ errors,...this.state.value, [name]: event.target.value });
     };
 
-    checkInputs(){
-        let name = document.getElementById('name').value;
-        let surname = document.getElementById('surname').value;
-        let thirdName = document.getElementById('thirdName').value;
-        let phone = document.getElementById('phone').value;
-        let link = document.getElementById('link').value;
-        let checkName = /^[a-z]$/i;
-        let checkPhone = /^((\+7|7|8)+([0-9]){10})$/gm;
-        if(name.length < 5 || !checkName.test(name))
-        {
-            return false;
+    sendData = (event)=>{
+        event.preventDefault();
+        if(validateForm(this.state.errors)) {
+            console.info('Valid Form')
+            let body = {
+                name: this.state.name,
+                surname: this.state.surname,
+                thirdName: this.state.thirdName,
+                phone: this.state.phone,
+                date: this.state.date,
+                link: this.state.link,
+                clickedCompany: this.state.clickedCompany
+            };
+            Request.create('/createclients', body)
+                .then(response=>{
+                    if(response.status === 200){
+                        this.props.showSnack();
+                        this.props.updateData();
+                    }
+                })
+        }else{
+            console.error('Invalid Form')
         }
-        if(surname.length < 5 || !checkName.test(surname))
-        {
-            return false;
-        }
-        if(thirdName.length < 5 || !checkName.test(thirdName))
-        {
-            return false;
-        }
-        if(link.length < 5)
-        {
-            return false;
-        }
-        if(!checkPhone.test(phone))
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-
-    sendData = ()=>{
-        let body = {
-            name: this.state.name,
-            surname: this.state.surname,
-            thirdName: this.state.thirdName,
-            phone: this.state.phone,
-            date: this.state.date,
-            link: this.state.link,
-            clickedCompany: this.state.clickedCompany
-        };
-        Request.create('/createclients', body)
-            .then(response=>{
-                if(response.status === 200){
-                    this.props.showSnack();
-                    this.props.updateData();
-                }
-            })
     };
 
     componentDidMount() {
@@ -95,9 +106,10 @@ class ClientDialog extends React.Component{
     };
 
     render() {
+        const {errors} = this.state;
         return(
             <div className='container-dialog'>
-                <div className='form-dialog' onSubmit={this.checkInputs}>
+                <form className='form-dialog' onSubmit={this.sendData}>
                     <div>
                         <p>
                             <label>
@@ -165,13 +177,12 @@ class ClientDialog extends React.Component{
                     </div>
                     <div>
                         <p>
-                            <button className={'clients-btn'} onClick={this.sendData}
-                                    disabled={!this.state.formValid || this.state.ok}>
+                            <button className={'clients-btn'}>
                                 Create client
                             </button>
                         </p>
                     </div>
-                </div>
+                </form>
             </div>
         )
     }

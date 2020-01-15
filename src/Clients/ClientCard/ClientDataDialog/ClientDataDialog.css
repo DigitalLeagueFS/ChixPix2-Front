@@ -1,6 +1,6 @@
 .client-info-dialog{
     width: 350px;
-    height: 75vh;
+    height: 80vh;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -21,4 +21,25 @@
     width: 225px;
     height: 225px;
     border-radius: 11px;
+}
+
+.client-btn {
+    background-color: rgb(140,198,62);
+    color: white;
+    height: 70px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.9;
+    width: 223px;
+    outline: none;
+}
+
+.client-btn:hover {
+    opacity:1;
+}
+
+.client-btn p {
+    margin-top: 10px;
 }

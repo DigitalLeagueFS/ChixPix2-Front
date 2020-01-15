@@ -15,7 +15,7 @@ class ClientCard extends React.Component{
             phone: '',
             date: '',
             link: '',
-            company_name: ''
+            company_name: '',
         }
     }
 
@@ -31,6 +31,7 @@ class ClientCard extends React.Component{
     };
 
     render() {
+        console.log(this.body);
         return(
             <div>
                 <div className='clientCard' key={this.props.id} onClick={this.showClient}>
@@ -44,7 +45,6 @@ class ClientCard extends React.Component{
                 </div>
                 <Dialog open={this.state.open} onClose={this.handleClose}><InfoCard {...this.state}/></Dialog>
             </div>
-
         )
     }
 }
