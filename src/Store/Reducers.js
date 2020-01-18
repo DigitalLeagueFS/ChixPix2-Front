@@ -6,7 +6,8 @@ const AppState = {
     link:'',
     error:'',
     needUpdate:false,
-    success:false
+    success:false,
+    user_id:''
 };
 
 export function companyClick(state = AppState,action) {
@@ -52,4 +53,14 @@ export function snackContent(state = AppState,action) {
         default:
             return state
     }
+}
+
+export function getClientId(state = AppState,action) {
+    if(action.type === 'PUSH_USER_ID'){
+        return{
+            ...state,
+            user_id: action.payload
+        }
+    }
+    return state
 }

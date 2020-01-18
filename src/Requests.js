@@ -19,38 +19,38 @@ instance.interceptors.response.use(response=>{
                 window.location.href = '/'
         }
         if (error.response.status === 406){
-            window.location.href = '/profile'
+            window.location.href = '/profile/my_profile'
         }
     }
 }));
 
 class BasicRequests {
-    create(url,body){
-        return instance.post(url,body,{
+    async create(url,body){
+        return await instance.post(url,body,{
             headers:{
                 'Authorization':localStorage.getItem('token')
             }
         })
     }
 
-    get(url){
-        return instance.get(url,{
+    async get(url){
+        return await instance.get(url,{
             headers:{
                 'Authorization':localStorage.getItem('token')
             }
         })
     }
 
-    update(url,body){
-        return instance.put(url,body,{
+    async update(url,body){
+        return await instance.put(url,body,{
             headers:{
                 'Authorization':localStorage.getItem('token')
             }
         })
     }
 
-    delete(url){
-        return instance.delete(url,{
+    async delete(url){
+        return await instance.delete(url,{
             headers:{
                 'Authorization':localStorage.getItem('token')
             }

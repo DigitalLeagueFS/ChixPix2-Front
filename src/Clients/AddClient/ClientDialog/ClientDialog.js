@@ -3,15 +3,8 @@ import Request from "../../../Requests";
 import './ClientDialog.css';
 import {connect} from 'react-redux'
 import {mapDispatchToProps, mapStateToProps} from "./indexClientDialog";
+import Chip from "@material-ui/core/Chip";
 
-const validateForm = (errors) => {
-    let valid = true;
-    Object.values(errors).forEach(
-        // if we have an error string set valid to false
-        (val) => val.length > 0 && (valid = false)
-    );
-    return valid;
-};
 
 
 class ClientDialog extends React.Component{
@@ -27,46 +20,93 @@ class ClientDialog extends React.Component{
             clickedCompany:'',
             company: [],
             errors: {
-                name: '',
-                surname: '',
-                thirdName: '',
-                phone: '',
-                link: '',
-            }
+                validName: 'Name must be 4 characters long!',
+                validSurname: 'Surname  must be 5 characters long!',
+                validThirdName: 'Third name must be 8 characters long!',
+                validPhone: 'Phone must be 8 characters long!',
+                validLink: 'Link must be 18 characters long!',
+            },
+            disabled:false,
+            show:false,
+            content:''
         };
     }
 
     handleChange = name => event => {
-        event.preventDefault();
-        const{name1,value} = event.target;
-        let errors = this.state.errors;
-        let checkPhone = /^((\+7|7|8)+([0-9]){10})$/gm;
-        switch (name1) {
+        let input = event.target;
+        switch (name) {
             case 'name':
-                errors.name = value.length < 5 ? 'Full Name must be 5 characters long!' : '';
+                this.setState(()=>({
+                  errors: {
+                      ...this.state.errors,
+                      validName:input.value.length > 4
+                          ? ''
+                          : 'Name must be 4 characters long!'
+                  }
+                }));
                 break;
             case 'surname':
-                errors.surname = value.length < 5 ? 'Full Surname must be 5 characters long!' : '';
+                this.setState(()=>({
+                    errors: {
+                        ...this.state.errors,
+                        validSurname:input.value.length > 5
+                            ? ''
+                            : 'Surname  must be 5 characters long!'
+                    }
+                }));
                 break;
             case 'thirdName':
-                errors.thirdName = value.length < 5 ? 'Full Third Name must be 5 characters long!' : '';
+                this.setState(()=>({
+                    errors: {
+                        ...this.state.errors,
+                        validThirdName:input.value.length > 8
+                            ? ''
+                            : 'Third name must be 8 characters long!'
+                    }
+                }));
                 break;
             case 'phone':
-                errors.phone = !checkPhone.test(value) ? 'Enter correct phone number!' : '';
+                this.setState(()=>({
+                    errors: {
+                        ...this.state.errors,
+                        validPhone:input.value.length > 8
+                            ? ''
+                            : 'Phone must be 8 characters long!'
+                    }
+                }));
                 break;
             case 'link':
-                errors.link = value.length < 10 ? 'Link must be 10 characters long!' : '';
+                this.setState(()=>({
+                    errors: {
+                        ...this.state.errors,
+                        validLink:input.value.length > 16
+                            ? ''
+                            : 'Link must be 18 characters long!'
+                    }
+                }));
                 break;
             default:
                 break;
         }
-        this.setState({ errors,...this.state.value, [name]: event.target.value });
+
+        this.setState({...this.state.errors,[name]: event.target.value},()=>console.log(this.state.errors));
     };
 
-    sendData = (event)=>{
-        event.preventDefault();
-        if(validateForm(this.state.errors)) {
-            console.info('Valid Form')
+    sendData = ()=>{
+        if(this.state.errors.validName || this.state.errors.validLink
+            || this.state.errors.validPhone || this.state.errors.validSurname || this.state.errors.validThirdName){
+            this.setState({
+                show:true,
+                content:this.state.errors.validName || this.state.validSurname || this.state.errors.validThirdName
+                    || this.state.errors.validPhone || this.state.errors.validLink
+            });
+            setTimeout(()=>{
+                this.setState({
+                    show:false
+                })
+            },3000)
+        }
+        else {
             let body = {
                 name: this.state.name,
                 surname: this.state.surname,
@@ -81,17 +121,18 @@ class ClientDialog extends React.Component{
                     if(response.status === 200){
                         this.props.showSnack();
                         this.props.updateData();
+                        this.setState({
+                            disabled:true
+                        })
                     }
                 })
-        }else{
-            console.error('Invalid Form')
         }
     };
 
     componentDidMount() {
         Request.get('/getcompaniesname')
             .then(response=>{
-                this.setState({company : response.data});
+                this.setState({company : response.data,clickedCompany:response.data[0]});
             })
     };
 
@@ -106,10 +147,10 @@ class ClientDialog extends React.Component{
     };
 
     render() {
-        const {errors} = this.state;
         return(
             <div className='container-dialog'>
-                <form className='form-dialog' onSubmit={this.sendData}>
+                <div className='form-dialog'>
+                    {this.state.show && <Chip label={this.state.content} color="secondary" style={{width:'100%'}}/>}
                     <div>
                         <p>
                             <label>
@@ -142,7 +183,7 @@ class ClientDialog extends React.Component{
                             <label>
                                 Company:
                                 <select className='clients-input' name={'company'} placeholder={'Enter Name of Company'}
-                                        required defaultValue={this.state.clickedCompany} onChange={this.handleChange('clickedCompany')}>
+                                         defaultValue='DigitalLeague' onChange={this.handleChange('clickedCompany')}>
                                     {this.mapOption()}
                                 </select>
                             </label>
@@ -177,12 +218,12 @@ class ClientDialog extends React.Component{
                     </div>
                     <div>
                         <p>
-                            <button className={'clients-btn'}>
+                            <button className={'clients-btn'} onClick={this.sendData} disabled={this.state.disabled}>
                                 Create client
                             </button>
                         </p>
                     </div>
-                </form>
+                </div>
             </div>
         )
     }

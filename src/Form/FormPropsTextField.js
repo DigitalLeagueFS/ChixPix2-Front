@@ -12,6 +12,7 @@ let FormPropsTextField = function (props,label_form) {
                 }
             }
             variant="outlined"
+            disabled
         />
     )
 };

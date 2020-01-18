@@ -39,8 +39,9 @@ class Clients extends React.Component{
             return <ClientCard firstName = {elem.name}
                                secondName = {elem.surname}
                                company = {elem.company_name}
-                               link = {elem.link}
+                               imgLink = {elem.link}
                                id = {elem.id}
+                               key = {elem.id}
             />
         })
     }

@@ -3,6 +3,8 @@ import './ClientCard.css'
 import Request from "../../Requests";
 import {Dialog} from "@material-ui/core";
 import InfoCard from "./ClientDataDialog/ClientDataDialog";
+import {connect} from 'react-redux'
+import {mapStateToProps,mapDispatchToProps} from "./indexClientCard";
 
 class ClientCard extends React.Component{
     constructor(props) {
@@ -16,13 +18,14 @@ class ClientCard extends React.Component{
             date: '',
             link: '',
             company_name: '',
-        }
+        };
     }
 
     showClient = () => {
+        this.props.clientClick(this.props.id);
         Request.get(`/getClient/${this.props.id}`)
             .then(response=>{
-                this.setState({...response.data,open : true});
+                this.setState({open:true,...response.data});
             })
     };
 
@@ -31,11 +34,10 @@ class ClientCard extends React.Component{
     };
 
     render() {
-        console.log(this.body);
         return(
             <div>
                 <div className='clientCard' key={this.props.id} onClick={this.showClient}>
-                    <img src={this.props.link}
+                    <img src={this.props.imgLink}
                          className='clientCard-img' alt={this.props.firstName}/>
                     <div>
                         <h2>{this.props.firstName}</h2>
@@ -49,4 +51,4 @@ class ClientCard extends React.Component{
     }
 }
 
-export default ClientCard;
+export default connect(mapStateToProps,mapDispatchToProps)(ClientCard);
