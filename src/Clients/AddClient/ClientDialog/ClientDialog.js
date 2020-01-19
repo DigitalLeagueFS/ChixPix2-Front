@@ -89,7 +89,7 @@ class ClientDialog extends React.Component{
                 break;
         }
 
-        this.setState({...this.state.errors,[name]: event.target.value},()=>console.log(this.state.errors));
+        this.setState({...this.state.errors,[name]: event.target.value});
     };
 
     sendData = ()=>{
