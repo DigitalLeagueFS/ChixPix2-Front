@@ -1,6 +1,6 @@
 import React from "react";
 import './CompaniesInfo.css'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowIcon from '@material-ui/icons/ArrowBack';
 import {connect} from "react-redux";
 import {mapStateToProps} from "./indexCompaniesInfo";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -37,12 +37,12 @@ class CompaniesInfo extends React.Component{
             <div className={this.props.show ? 'companies-info-box companies-info-box-show' : "companies-info-box"}>
                 <div>
                     <button className={'back-btn'} onClick={() => {this.props.updateShowInfo(!this.props.show)}}>
-                        <ArrowBackIcon/>
+                        <ArrowIcon/>
                     </button>
                 </div>
                 <div className='box-companies-info'>
                     <div className='box-companies-info-image'>
-                        <img src={this.state.image} alt={'Company image'}/>
+                        <img src={this.state.image} alt={this.state.name}/>
                     </div>
                     <div>
                         <a className='box-companies-info-link' href={this.state.link}>{this.state.name}</a>
@@ -57,7 +57,7 @@ class CompaniesInfo extends React.Component{
                                 <Typography>Description</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Typography>
+                                <Typography style={{overflow:'scroll',maxHeight:'300px'}}>
                                     {this.state.text}
                                 </Typography>
                             </ExpansionPanelDetails>
