@@ -16,6 +16,7 @@
     flex-direction: column;
 }
 
+
 .back-btn{
     display: flex;
     justify-content: center;
@@ -48,9 +49,9 @@
 }
 
 .box-companies-info-image{
-    margin-bottom: 30px;
-    width: 300px;
-    height: 300px;
+    margin-bottom: 20px;
+    width: 250px;
+    height: 250px;
     border-radius: 15%;
     background: whitesmoke;
 }
@@ -58,6 +59,15 @@
     width: 100%;
     height: 100%;
     border-radius: 15%;
+}
+
+.box-companies-info-p{
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    color: #281F19;
+    text-decoration: none;
 }
 
 .box-companies-info a{
@@ -84,5 +94,27 @@
 
 
 .box-companies-info-desc{
-    margin-top: 30px;
+    margin-top: 20px;
+}
+
+.companies-info-box-btn {
+    background-color: rgb(140,198,62);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 95%;
+    border-radius: 50px;
+    border: none;
+    transition: .3s;
+    cursor:pointer;
+    width: 50px;
+    height: 5vh;
+    outline: none;
+}
+
+
+.companies-info-box-btn:hover {
+    color: white;
 }

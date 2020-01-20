@@ -8,6 +8,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Request from "../../Requests";
 
 
 class CompaniesInfo extends React.Component{
@@ -18,7 +20,8 @@ class CompaniesInfo extends React.Component{
             desc : this.props.companyClick.desc,
             link : this.props.companyClick.link,
             image : this.props.companyClick.img,
-            text : this.props.companyClick.text
+            text : this.props.companyClick.text,
+            showButton : true
         };
     }
 
@@ -31,21 +34,34 @@ class CompaniesInfo extends React.Component{
                 text : this.props.companyClick.text})
     }
 
+    deleteCompany = () =>{
+        Request.delete(`/deleteCompanies/${this.props.companyClick.company_name}`)
+            .then(response=>{
+                if(response.status === 200){
+                    this.props.showSnack();
+                    this.props.updateData();
+                }
+            })
+    };
 
     render() {
         return(
-            <div className={this.props.show ? 'companies-info-box companies-info-box-show' : "companies-info-box"}>
+            <div className={this.props.show ? 'companies-info-box companies-info-box-show' : 'companies-info-box'}>
                 <div>
                     <button className={'back-btn'} onClick={() => {this.props.updateShowInfo(!this.props.show)}}>
                         <ArrowIcon/>
                     </button>
+                </div>
+                <div>
+                    <button className='companies-info-box-btn' onClick={this.deleteCompany}><DeleteForeverIcon/></button>
                 </div>
                 <div className='box-companies-info'>
                     <div className='box-companies-info-image'>
                         <img src={this.state.image} alt={this.state.name}/>
                     </div>
                     <div>
-                        <a className='box-companies-info-link' href={this.state.link}>{this.state.name}</a>
+                        <a className='box-companies-info-link' href={this.state.link}>{this.state.name} </a>
+                        <p className='box-companies-info-p'>{this.state.desc}</p>
                     </div>
                     <div className='box-companies-info-desc'>
                         <ExpansionPanel style={{width:'70%',margin: '0 auto'}}>
@@ -54,7 +70,7 @@ class CompaniesInfo extends React.Component{
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography>Description</Typography>
+                            <Typography>Description</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography style={{overflow:'scroll',maxHeight:'300px'}}>
