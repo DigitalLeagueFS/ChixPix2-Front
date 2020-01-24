@@ -7,7 +7,9 @@ const AppState = {
     error:'',
     needUpdate:false,
     success:false,
-    user_id:''
+    user_id:'',
+    companyData:[],
+    clientsData:[]
 };
 
 export function companyClick(state = AppState,action) {
@@ -63,4 +65,73 @@ export function getClientId(state = AppState,action) {
         }
     }
     return state
+}
+
+export function companyData(state = AppState,action) {
+    switch (action.type) {
+        case 'PUSH_COMPANY_DATA':
+            return{
+                ...state,
+                companyData: action.payload
+            };
+        case 'DELETE_COMPANY':
+            let arr = state.companyData.filter(elem=>{
+                return elem.id !== action.payload
+            });
+            return {
+                ...state,
+                companyData: arr
+            };
+        case 'ADD_COMPANY':
+            let elems = state.companyData;
+            elems.push(action.payload);
+            return {
+                ...state,
+                companyData: elems
+            };
+        default:
+            return state
+    }
+}
+
+export function clientsData(state = AppState,action) {
+    switch (action.type) {
+        case 'PUSH_CLIENTS_DATA':{
+            return{
+                ...state,
+                clientsData: action.payload
+            }
+        }
+
+        case 'DELETE_CLIENT':{
+            let clients = state.clientsData.filter(elem=>{
+                return elem.id !== action.payload
+            });
+            return {
+                ...state,
+                clientsData: clients
+            }
+        }
+        case 'ADD_CLIENT':{
+            let client = {
+                id:action.payload.id,
+                name: action.payload.name,
+                surname: action.payload.surname,
+                thirdName: action.payload.thirdName,
+                phone: action.payload.phone,
+                date: action.payload.date,
+                link: action.payload.link,
+                company: action.payload.clickedCompany.company_name
+            };
+            let arr = state.clientsData;
+            arr.push(client);
+            return {
+                ...state,
+                clientsData: arr
+            }
+        }
+        default:
+            return state
+    }
+
 }

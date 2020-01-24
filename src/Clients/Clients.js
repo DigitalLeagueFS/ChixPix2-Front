@@ -10,27 +10,21 @@ class Clients extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            data:[]
+            data:this.props.clientsData.clientsData,
         };
     }
     componentDidMount() {
         Request.get('/clients')
             .then(response=>{
-                this.setState({
-                    data:response.data
-                })
+                this.props.pushClientsData(response.data)
             })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.needUpdate){
-            this.props.updateDataCl();
-            Request.get('/clients')
-                .then(response=>{
-                    this.setState({
-                        data:response.data
-                    })
-                })
+        if(prevProps !== this.props){
+            this.setState({
+                data:this.props.clientsData.clientsData,
+            })
         }
     }
 
@@ -51,7 +45,7 @@ class Clients extends React.Component{
             <div>
                 <div className='clients-box'>
                    <div className='clientCard-box'>
-                      {this.showClients()}
+                       {this.showClients()}
                    </div>
                 </div>
                 <AddClientIcon/>

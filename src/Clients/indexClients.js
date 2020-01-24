@@ -1,12 +1,13 @@
 export const mapDispatchToProps = (dispatch)=> ({
-    updateDataCl:()=>{
+    pushClientsData:(payload)=>{
         dispatch({
-            type:'NO_NEED_UPDATE',
+            type:'PUSH_CLIENTS_DATA',
+            payload:payload
         })
     }
 });
 
 
 export const mapStateToProps = (state) =>{
-    return state.needUpdate
+    return state
 };

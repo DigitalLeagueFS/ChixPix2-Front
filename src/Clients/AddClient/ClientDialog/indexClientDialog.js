@@ -1,7 +1,8 @@
 export const mapDispatchToProps = (dispatch)=> ({
-    updateData:()=>{
+    updateData:(payload)=>{
         dispatch({
-            type:'NEED_UPDATE',
+            type:'ADD_CLIENT',
+            payload:payload
         })
     },
     showSnack:()=>{
@@ -13,5 +14,5 @@ export const mapDispatchToProps = (dispatch)=> ({
 
 
 export const mapStateToProps = (state) =>{
-    return state.needUpdate
+    return state
 };

@@ -116,11 +116,12 @@ class ClientDialog extends React.Component{
                 link: this.state.link,
                 clickedCompany: this.state.clickedCompany
             };
-            Request.create('/createclients', body)
+            Request.create('/clients', body)
                 .then(response=>{
                     if(response.status === 200){
+                        console.log(response.data);
                         this.props.showSnack();
-                        this.props.updateData();
+                        this.props.updateData(Object.assign({},body,{id:response.data.id}));
                         this.setState({
                             disabled:true
                         })
@@ -130,7 +131,7 @@ class ClientDialog extends React.Component{
     };
 
     componentDidMount() {
-        Request.get('/getcompaniesname')
+        Request.get('/companies/name')
             .then(response=>{
                 this.setState({company : response.data,clickedCompany:response.data[0]});
             })

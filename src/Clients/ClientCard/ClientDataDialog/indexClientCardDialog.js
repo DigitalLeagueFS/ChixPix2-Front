@@ -4,9 +4,10 @@ export const mapDispatchToProps = (dispatch)=> ({
             type:'SHOW_SNACK',
         })
     },
-    updateData:()=>{
+    updateData:(payload)=>{
         dispatch({
-            type:'NEED_UPDATE',
+            type:'DELETE_CLIENT',
+            payload:payload
         })
     },
 });

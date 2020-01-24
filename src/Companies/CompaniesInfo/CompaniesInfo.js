@@ -2,7 +2,7 @@ import React from "react";
 import './CompaniesInfo.css'
 import ArrowIcon from '@material-ui/icons/ArrowBack';
 import {connect} from "react-redux";
-import {mapStateToProps} from "./indexCompaniesInfo";
+import {mapStateToProps,mapDispatchToProps} from "./indexCompaniesInfo";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -21,25 +21,32 @@ class CompaniesInfo extends React.Component{
             link : this.props.companyClick.link,
             image : this.props.companyClick.img,
             text : this.props.companyClick.text,
-            showButton : true
+            showButton : true,
+            disabled:false
         };
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps !== this.props)
-            this.setState({name : this.props.companyClick.company_name,
+            this.setState({
+                name : this.props.companyClick.company_name,
                 desc : this.props.companyClick.desc,
                 link : this.props.companyClick.link,
                 image : this.props.companyClick.img,
-                text : this.props.companyClick.text})
+                text : this.props.companyClick.text,
+                disabled:false
+            })
     }
 
     deleteCompany = () =>{
-        Request.delete(`/deleteCompanies/${this.props.companyClick.company_name}`)
+        Request.delete(`/companies/${this.props.companyClick.id}`)
             .then(response=>{
                 if(response.status === 200){
                     this.props.showSnack();
-                    this.props.updateData();
+                    this.props.deleteCompany(this.props.companyClick.id);
+                    this.setState({
+                        disabled:true
+                    })
                 }
             })
     };
@@ -53,7 +60,10 @@ class CompaniesInfo extends React.Component{
                     </button>
                 </div>
                 <div>
-                    <button className='companies-info-box-btn' onClick={this.deleteCompany}><DeleteForeverIcon/></button>
+                    <button className='companies-info-box-btn'
+                            onClick={this.deleteCompany} disabled={this.state.disabled}>
+                        <DeleteForeverIcon/>
+                    </button>
                 </div>
                 <div className='box-companies-info'>
                     <div className='box-companies-info-image'>
@@ -64,7 +74,7 @@ class CompaniesInfo extends React.Component{
                         <p className='box-companies-info-p'>{this.state.desc}</p>
                     </div>
                     <div className='box-companies-info-desc'>
-                        <ExpansionPanel style={{width:'70%',margin: '0 auto'}}>
+                        <ExpansionPanel style={{minWidth:'70%',margin: '0 auto'}}>
                             <ExpansionPanelSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
@@ -85,4 +95,4 @@ class CompaniesInfo extends React.Component{
     }
 }
 
-export default connect(mapStateToProps)(CompaniesInfo);
+export default connect(mapStateToProps,mapDispatchToProps)(CompaniesInfo);

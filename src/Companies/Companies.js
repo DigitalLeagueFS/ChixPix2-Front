@@ -5,6 +5,7 @@ import Request from "../Requests";
 import {connect} from 'react-redux'
 import {mapDispatchToProps, mapStateToProps} from "./CompaniesStore";
 import CompaniesInfo from "./CompaniesInfo/CompaniesInfo";
+import AddCompanyIcon from "./AddCompany/AddCompanyIcon";
 
 class Companies extends React.Component{
     constructor(props) {
@@ -14,7 +15,7 @@ class Companies extends React.Component{
                 { title: 'Name', field: 'company_name' },
                 { title: 'Type', field: 'desc' },
             ],
-            data: [],
+            data: this.props.companyData.companyData,
             showInfo: false
         };
     }
@@ -22,10 +23,16 @@ class Companies extends React.Component{
     componentDidMount() {
         Request.get('/companies')
             .then(response=>{
-                this.setState({
-                    data:response.data
-                })
+                this.props.pushData(response.data)
             })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps !== this.props){
+            this.setState({
+                data:this.props.companyData.companyData
+            });
+        }
     }
 
     rowClick = (event,rowData)=>{
@@ -54,6 +61,7 @@ class Companies extends React.Component{
                          }}
                          onRowClick={this.rowClick}
                      />
+                     <AddCompanyIcon/>
                 </div>
             </div>
         );

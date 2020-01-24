@@ -23,7 +23,7 @@ class ClientCard extends React.Component{
 
     showClient = () => {
         this.props.clientClick(this.props.id);
-        Request.get(`/getClient/${this.props.id}`)
+        Request.get(`/clients/${this.props.id}`)
             .then(response=>{
                 this.setState({open:true,...response.data});
             })

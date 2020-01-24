@@ -24,11 +24,11 @@ class InfoCard extends React.Component{
     };
 
     deleteClient = () =>{
-      Request.delete(`/deleteUser/${this.props.getClientId.user_id}`)
+      Request.delete(`clients/${this.props.getClientId.user_id}`)
           .then(response=>{
               if(response.status === 200){
                   this.props.showSnack();
-                  this.props.updateData();
+                  this.props.updateData(this.props.getClientId.user_id);
               }
           })
     };
