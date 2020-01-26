@@ -1,0 +1,40 @@
+.tasks-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+}
+.tasks-header{
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid rgb(140,198,62);
+    margin:10px 0 10px 0;
+    color: #0080ff;
+}
+
+.tasks-header--deadline{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-elem-box{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+    cursor: pointer;
+    box-shadow: 0 0 0.1em black;
+    margin-top: 5px;
+}
+
+.task-elem-box:first-child{
+    margin-top: 50px;
+}
+.task-elem-box:hover{
+    box-shadow: 0 0 0.4em black;
+}

@@ -121,7 +121,7 @@ export function clientsData(state = AppState,action) {
                 phone: action.payload.phone,
                 date: action.payload.date,
                 link: action.payload.link,
-                company: action.payload.clickedCompany.company_name
+                company_name: action.payload.clickedCompany.company_name
             };
             let arr = state.clientsData;
             arr.push(client);

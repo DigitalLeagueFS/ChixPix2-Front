@@ -29,7 +29,7 @@
 }
 
 .clientCard div{
-    height: 70px;
+    max-height: 100px;
     display: flex;
     justify-content:center;
     flex-wrap: wrap;
@@ -48,11 +48,13 @@
     text-align: center;
     width: 100%;
     margin-top: -15px;
+    max-height: 10px;
 }
 
 .clientCard div h2{
     margin-top: 10px;
     margin-left: 10px;
+    max-height: 25px;
 }
 
 .clientCard-img{
