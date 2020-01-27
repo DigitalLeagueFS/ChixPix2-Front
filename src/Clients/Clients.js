@@ -30,8 +30,8 @@ class Clients extends React.Component{
 
     showClients(){
         return this.state.data.map(elem=>{
-            return <ClientCard firstName = {elem.name}
-                               secondName = {elem.surname}
+            return <ClientCard firstName = {elem.client_name}
+                               secondName = {elem.client_surname}
                                company = {elem.company_name}
                                imgLink = {elem.link}
                                id = {elem.id}

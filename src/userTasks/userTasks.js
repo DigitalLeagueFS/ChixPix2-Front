@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
+
+
 
 class userTasks extends React.Component{
     render() {
         return(
-            <div>
-
-            </div>
+            <div>Tasks</div>
         )
     }
 }
 
-export default userTasks;
+export default userTasks

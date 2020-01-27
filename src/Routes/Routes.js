@@ -10,10 +10,10 @@ import Companies from "../Companies/Companies";
 import Clients from "../Clients/Clients";
 import Workers from "../Workers/Workers"
 import Archives from "../Archives/Archives";
-import userTasks from "../userTasks/userTasks";
 import LeftNavBar from "../LeftNavBar/LeftNavBar";
 import {Provider} from 'react-redux'
 import {store} from "../Store/Store";
+import userTasks from "../userTasks/userTasks";
 
 const hist = createBrowserHistory();
 

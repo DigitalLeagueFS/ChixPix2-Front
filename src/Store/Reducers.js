@@ -9,7 +9,8 @@ const AppState = {
     success:false,
     user_id:'',
     companyData:[],
-    clientsData:[]
+    clientsData:[],
+    tasksData:[]
 };
 
 export function companyClick(state = AppState,action) {
@@ -133,5 +134,16 @@ export function clientsData(state = AppState,action) {
         default:
             return state
     }
+}
 
+export function tasksData(state = AppState,action) {
+    switch (action.type) {
+        case 'PUSH_TASKS':
+            return{
+                ...state,
+                tasksData:action.payload
+            };
+        default:
+            return state
+    }
 }
