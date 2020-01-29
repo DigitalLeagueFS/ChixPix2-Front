@@ -2,9 +2,18 @@ import * as React from "react"
 import {Link} from "react-router-dom"
 import './NavigationBar.css'
 import Snack from "../Snack/Snack";
+import {mapDispatchToProps, mapStateToProps} from "./indexNavBar";
+import {connect} from "react-redux";
+import Request from "../Requests";
 
 class NavBar extends React.Component
 {
+    componentDidMount() {
+        Request.get('/users/name')
+            .then(response=>{
+                this.props.pushName(response.data.name)
+            });
+    }
 
     handleClick = event=>{
       let arr = document.querySelectorAll('.navbar--elem');
@@ -44,4 +53,4 @@ class NavBar extends React.Component
     }
 }
 
-export default NavBar
+export default connect(mapStateToProps,mapDispatchToProps)(NavBar)

@@ -9,11 +9,11 @@ class InfoCard extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            name: this.props.name,
-            surname: this.props.surname,
-            thirdName: this.props.thirdName,
-            phone: this.props.phone,
-            date: this.props.date,
+            name: this.props.client_name,
+            surname: this.props.client_surname,
+            thirdName: this.props.client_thirdname,
+            phone: this.props.client_phone,
+            date: this.props.client_date,
             link: this.props.link,
             company: this.props.company_name,
             open: false

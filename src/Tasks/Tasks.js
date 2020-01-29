@@ -1,6 +1,6 @@
 import React from "react";
 import "./Tasks.css";
-import {StyledTableCell, StyledTableRow} from "./TaskElem/TaskElem";
+import {StyledTableCell, StyledTableRow} from "./TaskElem";
 import Request from "../Requests";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +12,7 @@ import {Warning} from "@material-ui/icons";
 import {connect} from 'react-redux'
 import {mapDispatchToProps, mapStateToProps} from "./indexTasks";
 import TaskInfo from "./TaskInfo/TaskInfo";
+import AddTaskIcon from "./AddTask/AddTaskIcon";
 
 
 class Tasks extends React.Component{
@@ -31,6 +32,14 @@ class Tasks extends React.Component{
             })
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props !== prevProps){
+            this.setState({
+                data:this.props.tasksData.tasksData
+            })
+        }
+    }
+
 
     rowElem = (data) =>{
       return(
@@ -40,7 +49,7 @@ class Tasks extends React.Component{
               <StyledTableCell component="th" scope="row">
                   {data.name}
               </StyledTableCell>
-              <StyledTableCell align="right" >{data.executor}</StyledTableCell>
+              <StyledTableCell align="right" >{data.user_firstname || '---'}</StyledTableCell>
               <StyledTableCell align="right">{data.result_description}</StyledTableCell>
               <StyledTableCell align="right" >{data.deadline}</StyledTableCell>
           </StyledTableRow>
@@ -61,6 +70,7 @@ class Tasks extends React.Component{
             <div>
                 <TaskInfo show={this.state.showInfo} updateShowInfo={this.updateShowInfo} id = {this.state.clicked}/>
             <div className='tasks-box'>
+                <AddTaskIcon/>
             <TableContainer component={Paper} style={{width:'70%',marginTop:'25px',overflowX:'hidden'}}>
                 <Table className={{minWidth:'700px'}} aria-label="customized table">
                     <TableHead  style={{border:'2px solid #0080ff'}}>

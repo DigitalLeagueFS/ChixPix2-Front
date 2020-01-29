@@ -1,5 +1,14 @@
 import {combineReducers, createStore} from "redux";
-import {clientsData, companyClick, companyData, getClientId, needUpdate, snackContent, tasksData} from "./Reducers";
+import {
+    clientsData,
+    companyClick,
+    companyData,
+    getClientId,
+    needUpdate,
+    pushName,
+    snackContent,
+    tasksData
+} from "./Reducers";
 
 
 export const store = createStore(combineReducers({
@@ -9,7 +18,8 @@ export const store = createStore(combineReducers({
     getClientId,
     companyData,
     clientsData,
-    tasksData
+    tasksData,
+    pushName
 }));
 
 // store.subscribe(()=>{

@@ -11,11 +11,11 @@ class ClientCard extends React.Component{
         super(props);
         this.state = {
             open:false,
-            name: '',
-            surname: '',
-            thirdName: '',
-            phone: '',
-            date: '',
+            client_name: '',
+            client_surname: '',
+            client_thirdname: '',
+            client_phone: '',
+            client_date: '',
             link: '',
             company_name: '',
         };

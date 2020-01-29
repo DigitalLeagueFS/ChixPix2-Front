@@ -10,7 +10,8 @@ const AppState = {
     user_id:'',
     companyData:[],
     clientsData:[],
-    tasksData:[]
+    tasksData:[],
+    username:''
 };
 
 export function companyClick(state = AppState,action) {
@@ -136,12 +137,54 @@ export function clientsData(state = AppState,action) {
     }
 }
 
+export function pushName(state = AppState,action) {
+    if(action.type === 'PUSH_NAME'){
+        return{
+            ...state,
+            username: action.payload
+        }
+    }
+    return state
+}
+
 export function tasksData(state = AppState,action) {
     switch (action.type) {
         case 'PUSH_TASKS':
             return{
                 ...state,
                 tasksData:action.payload
+            };
+        case 'DELETE_TASK':
+            let tasks = state.tasksData.filter(elem=>{
+                return elem.id !== action.payload
+            });
+            return {
+                ...state,
+                tasksData: tasks
+            };
+        case 'TAKE_TASK':
+            let taskArr = state.tasksData.map(elem=>{
+                if(elem.id === action.payload.id){
+                    elem.user_firstname = action.payload.name
+                }
+                return elem
+            });
+            return {
+                ...state,
+                tasksData: taskArr
+            };
+        case 'ADD_TASK':
+            let arr = state.tasksData;
+            let task = {
+                id: action.payload.task.id,
+                name: action.payload.task.name,
+                deadline: action.payload.task.deadline,
+                result_description: action.payload.result_description
+            };
+            arr.push(task);
+            return {
+                ...state,
+                tasksData: arr
             };
         default:
             return state
