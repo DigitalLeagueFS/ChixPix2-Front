@@ -8,8 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Warning} from "@material-ui/icons";
+import TaskInfo from "../Tasks/TaskInfo/TaskInfo";
+import {mapStateToProps,mapDispatchToProps} from "../Tasks/indexTasks";
 import {connect} from 'react-redux'
-
 
 
 class userTasks extends React.Component{
@@ -25,7 +26,7 @@ class userTasks extends React.Component{
         Request.get('/tasks/user')
             .then(response=>{
                 this.setState({data:response.data});
-                // this.props.pushTasks(response.data);
+                this.props.pushTasks(response.data);
             })
     }
 
@@ -64,6 +65,12 @@ class userTasks extends React.Component{
     render() {
         return(
             <div>
+                {this.state.showInfo && <TaskInfo
+                    show={this.state.showInfo}
+                    updateShowInfo={this.updateShowInfo}
+                    id = {this.state.clicked}
+                    path='user'
+                />}
                 <div className='tasks-box'>
                     <TableContainer component={Paper} style={{width:'70%',marginTop:'25px',overflowX:'hidden'}}>
                         <Table className={{minWidth:'700px'}} aria-label="customized table">
@@ -92,4 +99,4 @@ class userTasks extends React.Component{
     }
 }
 
-export default userTasks;
+export default connect(mapStateToProps,mapDispatchToProps)(userTasks);

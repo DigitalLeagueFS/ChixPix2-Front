@@ -68,7 +68,11 @@ class Tasks extends React.Component{
     render() {
         return(
             <div>
-                <TaskInfo show={this.state.showInfo} updateShowInfo={this.updateShowInfo} id = {this.state.clicked}/>
+                {this.state.showInfo && <TaskInfo show={this.state.showInfo}
+                                                  updateShowInfo={this.updateShowInfo}
+                                                  id = {this.state.clicked}
+                                                  path='all'
+                />}
             <div className='tasks-box'>
                 <AddTaskIcon/>
             <TableContainer component={Paper} style={{width:'70%',marginTop:'25px',overflowX:'hidden'}}>
