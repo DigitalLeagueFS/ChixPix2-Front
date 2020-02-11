@@ -115,8 +115,8 @@ class AddCompanyDialog extends React.Component{
             Request.create('/companies',body)
                 .then(response=>{
                     if(response.data){
-                        this.props.addCompany(response.data);
                         this.props.showSnack();
+                        this.props.addCompany(response.data);
                         this.setState({
                             disabled:true
                         })

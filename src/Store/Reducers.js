@@ -117,8 +117,8 @@ export function clientsData(state = AppState,action) {
         case 'ADD_CLIENT':{
             let client = {
                 id:action.payload.id,
-                name: action.payload.name,
-                surname: action.payload.surname,
+                client_name: action.payload.name,
+                client_surname: action.payload.surname,
                 thirdName: action.payload.thirdName,
                 phone: action.payload.phone,
                 date: action.payload.date,

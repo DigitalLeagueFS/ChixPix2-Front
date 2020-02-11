@@ -28,14 +28,6 @@ class Archives extends React.Component{
             })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props !== prevProps){
-            this.setState({
-                data:this.props.tasksData.tasksData
-            })
-        }
-    }
-
 
     rowElem = (data) =>{
         return(
