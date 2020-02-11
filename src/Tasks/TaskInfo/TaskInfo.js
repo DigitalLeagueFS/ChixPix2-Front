@@ -105,14 +105,14 @@ class TaskInfo extends React.Component{
           default:
               let color;
               switch (this.state.status) {
-                  case 'Not Ready':
-                      color = 'orange';
-                      break;
                   case 'Done':
                       color = 'green';
                       break;
+                  case 'Failed':
+                      color = 'red';
+                      break;
                   default:
-                      color='red';
+                      color = 'orange';
                       break;
               }
               return(

@@ -1,7 +1,6 @@
 .container-dialog{
-    width: 500px;
-    height: 85vh;
-    display: -webkit-box;
+    width: 400px;
+    height: 80vh;
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;

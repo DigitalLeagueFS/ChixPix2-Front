@@ -1,22 +1,28 @@
 import React from "react";
 import Request from "../../../Requests";
 import Chip from "@material-ui/core/Chip";
-import {connect} from "react-redux";
+import {connect} from 'react-redux'
+import {mapStateToProps,mapDispatchToProps} from "./indexWorkersDialog";
 
 class WorkersDialog extends React.Component{
     constructor(props) {
         super(props);
         this.state={
+            login:'',
+            password:'',
             name: '',
             surname: '',
             thirdName: '',
-            date: '',
+            date: new Date().toJSON().slice(0,10).replace(/-/g,'-'),
             clickedPost:'',
             post: [],
             errors: {
+                validLogin:'Login must be 6 characters long!',
+                validPassword:'Password must be 6 characters long!',
                 validName: 'Name must be 4 characters long!',
                 validSurname: 'Surname  must be 5 characters long!',
                 validThirdName: 'Third name must be 8 characters long!',
+                validDate: 'Date must exist!',
             },
             disabled:false,
             show:false,
@@ -27,11 +33,31 @@ class WorkersDialog extends React.Component{
     handleChange = name => event => {
         let input = event.target;
         switch (name) {
+            case 'login':
+                this.setState(()=>({
+                    errors: {
+                        ...this.state.errors,
+                        validLogin:input.value.length > 5
+                            ? ''
+                            : 'Login must be 6 characters long!'
+                    }
+                }));
+                break;
+            case 'password':
+                this.setState(()=>({
+                    errors: {
+                        ...this.state.errors,
+                        validPassword:input.value.length > 5
+                            ? ''
+                            : 'Password must be 6 characters long!'
+                    }
+                }));
+                break;
             case 'name':
                 this.setState(()=>({
                     errors: {
                         ...this.state.errors,
-                        validName:input.value.length > 4
+                        validName:input.value.length > 3
                             ? ''
                             : 'Name must be 4 characters long!'
                     }
@@ -41,7 +67,7 @@ class WorkersDialog extends React.Component{
                 this.setState(()=>({
                     errors: {
                         ...this.state.errors,
-                        validSurname:input.value.length > 5
+                        validSurname:input.value.length > 4
                             ? ''
                             : 'Surname  must be 5 characters long!'
                     }
@@ -51,19 +77,19 @@ class WorkersDialog extends React.Component{
                 this.setState(()=>({
                     errors: {
                         ...this.state.errors,
-                        validThirdName:input.value.length > 8
+                        validThirdName:input.value.length > 7
                             ? ''
                             : 'Third name must be 8 characters long!'
                     }
                 }));
                 break;
-            case 'post':
+            case 'date':
                 this.setState(()=>({
                     errors: {
                         ...this.state.errors,
-                        validLink:input.value.length > 4
+                        validDate:!!input.value.length
                             ? ''
-                            : 'Link must be 4 characters long!'
+                            : 'Date must exist'
                     }
                 }));
                 break;
@@ -75,11 +101,14 @@ class WorkersDialog extends React.Component{
     };
 
     sendData = ()=>{
-        if(this.state.errors.validName || this.state.errors.validPost
-            || this.state.errors.validSurname || this.state.errors.validThirdName){
+        if(this.state.errors.validLogin || this.state.errors.validPassword || this.state.errors.validName
+            || this.state.errors.validSurname || this.state.errors.validThirdName
+            || this.state.validDate ){
             this.setState({
                 show:true,
-                content:this.state.errors.validName || this.state.validSurname || this.state.errors.validThirdName || this.state.errors.validPost
+                content:this.state.errors.validLogin || this.state.errors.validPassword ||
+                    this.state.errors.validName || this.state.validSurname || this.state.errors.validThirdName
+                    || this.state.validDate
             });
             setTimeout(()=>{
                 this.setState({
@@ -89,18 +118,18 @@ class WorkersDialog extends React.Component{
         }
         else {
             let body = {
+                login: this.state.login,
+                password:this.state.password,
                 name: this.state.name,
                 surname: this.state.surname,
                 thirdName: this.state.thirdName,
                 date: this.state.date,
                 clickedPost: this.state.clickedPost,
             };
-            Request.create('/workers', body)
+            Request.create('/users', body)
                 .then(response=>{
                     if(response.status === 200){
-                        console.log(response.data);
                         this.props.showSnack();
-                        this.props.updateData(Object.assign({},body,{id:response.data.id}));
                         this.setState({
                             disabled:true
                         })
@@ -131,6 +160,23 @@ class WorkersDialog extends React.Component{
             <div className='container-dialog'>
                 <div className='form-dialog'>
                     {this.state.show && <Chip label={this.state.content} color="secondary" style={{width:'100%'}}/>}
+                    <div>
+                        Login:
+                        <input className='clients-input'
+                               placeholder={'Enter Login'}
+                               value={this.state.login}
+                               name={'login'}
+                               onChange={this.handleChange('login')}/>
+                    </div>
+                    <div>
+
+                        Password:
+                        <input className='clients-input'
+                               name={'password'}
+                               value={this.state.password}
+                               placeholder={'Enter Password'}
+                               onChange={this.handleChange('password')}/>
+                    </div>
                     <div>
                                 Name:
                                 <input className='clients-input' type={'text'} name={'name'} placeholder={'Enter Name'}
@@ -171,4 +217,4 @@ class WorkersDialog extends React.Component{
     }
 }
 
-export default WorkersDialog
+export default connect(mapStateToProps,mapDispatchToProps)(WorkersDialog)
