@@ -4,6 +4,7 @@ import './ClientDialog.css';
 import {connect} from 'react-redux'
 import {mapDispatchToProps, mapStateToProps} from "./indexClientDialog";
 import Chip from "@material-ui/core/Chip";
+import Input from "../../../Elements/Elements";
 
 
 
@@ -18,6 +19,7 @@ class ClientDialog extends React.Component{
             date: '',
             link: '',
             clickedCompany:'',
+            value: '',
             company: [],
             errors: {
                 validName: 'Name must be 4 characters long!',
@@ -154,9 +156,13 @@ class ClientDialog extends React.Component{
                     {this.state.show && <Chip label={this.state.content} color="secondary" style={{width:'100%'}}/>}
                     <div>
                                 Name:
-                                <input className='clients-input' type={'text'} name={'name'} placeholder={'Enter Name'}
-                                       value={this.state.name} onChange={this.handleChange('name')}/>
+                                <Input className='clients-input' type='text' name='name' handleChange={this.handleChange.bind(this)}/>
                     </div>
+                   {/* <div>
+                                Name:
+                                <input className='clients-input' type={'text'} name={'name'} placeholder={'Enter name'}
+                                       value={this.state.name} onChange={this.handleChange('name')}/>
+                    </div>*/}
                     <div>
                                 Surname:
                                 <input className='clients-input' type={'text'} name={'surname'} placeholder={'Enter Surname'}
