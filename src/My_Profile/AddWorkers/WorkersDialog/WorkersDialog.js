@@ -2,7 +2,6 @@ import React from "react";
 import Request from "../../../Requests";
 import Chip from "@material-ui/core/Chip";
 import {connect} from "react-redux";
-import {mapDispatchToProps, mapStateToProps} from "../../../Clients/AddClient/ClientDialog/indexClientDialog";
 
 class WorkersDialog extends React.Component{
     constructor(props) {
@@ -133,58 +132,38 @@ class WorkersDialog extends React.Component{
                 <div className='form-dialog'>
                     {this.state.show && <Chip label={this.state.content} color="secondary" style={{width:'100%'}}/>}
                     <div>
-                        <p>
-                            <label>
                                 Name:
                                 <input className='clients-input' type={'text'} name={'name'} placeholder={'Enter Name'}
                                        value={this.state.name} onChange={this.handleChange('name')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
+
                                 Surname:
                                 <input className='clients-input' type={'text'} name={'surname'} placeholder={'Enter Surname'}
                                        value={this.state.surname} onChange={this.handleChange('surname')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
+
                                 Third Name:
                                 <input className='clients-input' type={'text'} name={'thirdName'} placeholder={'Enter Third Name'}
                                        value={this.state.thirdName} onChange={this.handleChange('thirdName')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Date:
                                 <input className='clients-input' type={'date'} name={'date'} placeholder={'Enter Date'}
                                        value={this.state.date} onChange={this.handleChange('date')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Post:
                                 <select className='clients-input' name={'post'} placeholder={'Enter Post'}
                                         onChange={this.handleChange('clickedPost')}>
                                     {this.mapOption()}
                                 </select>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
                             <button className={'clients-btn'} onClick={this.sendData} disabled={this.state.disabled}>
                                 Create worker
                             </button>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -192,8 +171,4 @@ class WorkersDialog extends React.Component{
     }
 }
 
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(WorkersDialog)
+export default WorkersDialog

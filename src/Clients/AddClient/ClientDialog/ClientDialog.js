@@ -153,76 +153,46 @@ class ClientDialog extends React.Component{
                 <div className='form-dialog'>
                     {this.state.show && <Chip label={this.state.content} color="secondary" style={{width:'100%'}}/>}
                     <div>
-                        <p>
-                            <label>
                                 Name:
                                 <input className='clients-input' type={'text'} name={'name'} placeholder={'Enter Name'}
                                        value={this.state.name} onChange={this.handleChange('name')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Surname:
                                 <input className='clients-input' type={'text'} name={'surname'} placeholder={'Enter Surname'}
                                        value={this.state.surname} onChange={this.handleChange('surname')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Third Name:
                                 <input className='clients-input' type={'text'} name={'thirdName'} placeholder={'Enter Third Name'}
                                        value={this.state.thirdName} onChange={this.handleChange('thirdName')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Company:
                                 <select className='clients-input' name={'company'} placeholder={'Enter Name of Company'}
                                          defaultValue='DigitalLeague' onChange={this.handleChange('clickedCompany')}>
                                     {this.mapOption()}
                                 </select>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Phone:
                                 <input className='clients-input' type={'phone'} name={'phone'} placeholder={'Enter Phone'}
                                        value={this.state.phone} onChange={this.handleChange('phone')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Date:
                                 <input className='clients-input' type={'date'} name={'date'} placeholder={'Enter Date'}
                                        value={this.state.date} onChange={this.handleChange('date')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
-                            <label>
                                 Link to Photo:
                                 <input className='clients-input' type={'text'} name={'link'} placeholder={'Enter Link'}
                                        value={this.state.link} onChange={this.handleChange('link')}/>
-                            </label>
-                        </p>
                     </div>
                     <div>
-                        <p>
                             <button className={'clients-btn'} onClick={this.sendData} disabled={this.state.disabled}>
                                 Create client
                             </button>
-                        </p>
                     </div>
                 </div>
             </div>

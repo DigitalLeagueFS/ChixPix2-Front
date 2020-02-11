@@ -17,6 +17,10 @@
     width: 225px;
 }
 
+.form-dialog div {
+    margin-bottom: 15px;
+}
+
 .clients-input{
     width:100%;
     border: none;

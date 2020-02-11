@@ -8,7 +8,6 @@ import UserInfo from '../My_Profile/My_Profile'
 import Tasks from "../Tasks/Tasks";
 import Companies from "../Companies/Companies";
 import Clients from "../Clients/Clients";
-import Workers from "../Workers/Workers"
 import Archives from "../Archives/Archives";
 import LeftNavBar from "../LeftNavBar/LeftNavBar";
 import {Provider} from 'react-redux'
@@ -37,7 +36,6 @@ class Routes extends React.Component{
                     </Route>
                     <Route>
                        <Route exact path='/profile/my_profile' component={UserInfo}/>
-                       <Route exact path='/profile/workers' component={Workers}/>
                        <Route path='/profile' render={(props) => (<LeftNavBar {...props} context='LeftNavBarProfile'/>)}/>
                     </Route>
                 </Router>

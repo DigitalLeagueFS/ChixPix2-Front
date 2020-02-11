@@ -2,6 +2,7 @@ import React from "react";
 import Request from "../Requests";
 import "./My_Profile.css";
 import FormPropsTextField from "../Form/FormPropsTextField";
+import AddWorkerIcon from "./AddWorkers/AddWorkersIcon";
 
 
 
@@ -35,25 +36,28 @@ class UserInfo extends React.Component{
     }
     render() {
         return(
-            <div className='my--profile--box'>
-                <div className='card'>
-                    <div>
-                        {FormPropsTextField(this.state.secondName,'Second Name')}
-                    </div>
-                    <div>
-                        {FormPropsTextField(this.state.firstName, 'First Name')}
-                    </div>
-                    <div>
-                        {FormPropsTextField(this.state.thirdName,'Third Name')}
-                    </div>
-                    <div>
-                        {FormPropsTextField(this.state.post,'Post')}
-                    </div>
-                    <div>
-                        {FormPropsTextField(this.state.date,'Date')}
-                    </div>
-                    <div>
-                        <button type={'submit'} className='logout-btn' onClick={this.logOut}>Log Out</button>
+            <div>
+                <AddWorkerIcon/>
+                <div className='my--profile--box'>
+                    <div className='card'>
+                        <div>
+                            {FormPropsTextField(this.state.secondName,'Second Name')}
+                        </div>
+                        <div>
+                            {FormPropsTextField(this.state.firstName, 'First Name')}
+                        </div>
+                        <div>
+                            {FormPropsTextField(this.state.thirdName,'Third Name')}
+                        </div>
+                        <div>
+                            {FormPropsTextField(this.state.post,'Post')}
+                        </div>
+                        <div>
+                            {FormPropsTextField(this.state.date,'Date')}
+                        </div>
+                        <div>
+                            <button type={'submit'} className='logout-btn' onClick={this.logOut}>Log Out</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import {BusinessCenter, Dashboard, People,RecentActors,LibraryBooks,Portrait, Assignment} from "@material-ui/icons";
+import {BusinessCenter, Dashboard, People,LibraryBooks,Portrait, Assignment} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import './LeftMenuElem.css'
 
@@ -19,9 +19,6 @@ function LeftMenuElem(props){
             break;
         case 'Clients':
             img = <People style={{pointerEvents:'none'}}/>;
-            break;
-        case 'Workers':
-            img = <RecentActors style={{pointerEvents:'none'}}/>;
             break;
         case 'Archive':
             img = <LibraryBooks style={{pointerEvents:'none'}}/>;

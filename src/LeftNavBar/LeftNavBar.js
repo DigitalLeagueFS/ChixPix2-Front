@@ -29,7 +29,6 @@ function LeftNavBar(props) {
                <div className='main--box'>
                    <div className='left--navbar'>
                        <LeftMenuElem context='My Profile' link='/profile/my_profile'/>
-                       <LeftMenuElem context='Workers' link='/profile/workers'/>
                    </div>
                </div>
            );
