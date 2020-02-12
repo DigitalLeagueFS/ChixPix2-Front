@@ -162,7 +162,7 @@ class TaskInfo extends React.Component{
                 {this.props.path === 'all' &&
                 <div>
                     <button className='companies-info-box-btn'
-                            style={this.state.disabledTask || this.state.executor.name ? {backgroundColor:'grey'}:{}}
+                            style={this.state.disabledTask || this.state.disabled || this.state.executor.name ? {backgroundColor:'grey'}:{}}
                             onClick={this.deleteTask}
                             disabled={this.state.disabled}>
                         <DeleteForeverIcon/>
@@ -195,10 +195,10 @@ class TaskInfo extends React.Component{
                         {this.props.path === 'all' &&
                         <button className='client-btn'
                                 style={Object.assign({},
-                                    {marginTop:'10%'},this.state.disabledTask || this.state.executor.name ? {backgroundColor:'grey'}:{}
+                                    {marginTop:'10%'},this.state.disabled || this.state.disabledTask|| this.state.executor.name ? {backgroundColor:'grey'}:{}
                                 )}
                                 onClick={this.takeTask}
-                                disabled={this.state.disabledTask}>
+                                disabled={this.state.disabled}>
                             Take task
                         </button>
                         }

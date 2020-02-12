@@ -18,18 +18,18 @@ class UserInfo extends React.Component{
         }
     }
 
-    // componentDidMount() {
-    //     Request.get('/user')
-    //         .then(response=>{
-    //             this.setState({
-    //                 firstName:response.data.firstName,
-    //                 secondName: response.data.secondName,
-    //                 thirdName: response.data.thirdName,
-    //                 date: response.data.date,
-    //                 post: response.data.post
-    //             });
-    //         })
-    // }
+    componentDidMount() {
+        Request.get('/user')
+            .then(response=>{
+                this.setState({
+                    firstName:response.data.firstName,
+                    secondName: response.data.secondName,
+                    thirdName: response.data.thirdName,
+                    date: response.data.date,
+                    post: response.data.post
+                });
+            })
+    }
     logOut() {
         localStorage.clear();
         window.location.href = '/';
